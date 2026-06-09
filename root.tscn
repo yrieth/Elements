@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://b2mroqni5m0pa"]
+
+[ext_resource type="Texture2D" uid="uid://bsbbb6fjj01jn" path="res://icon.svg" id="1_pq8q7"]
+[ext_resource type="Script" uid="uid://bqcrk3xj3x75b" path="res://player.gd" id="1_pyidc"]
+[ext_resource type="Script" uid="uid://wmeweo0ktrni" path="res://camera_2d.gd" id="3_28aoi"]
+[ext_resource type="Script" uid="uid://blid4ppcqpdto" path="res://fps.gd" id="3_vvh5c"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pyidc"]
+radius = 64.0
+height = 256.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pyidc"]
+b = Vector2(318, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvh5c"]
+size = Vector2(1690, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28aoi"]
+size = Vector2(128, 128)
+
+[node name="Root" type="Node" unique_id=1142320841]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=96395166]
+unique_name_in_owner = true
+position = Vector2(869, 947)
+script = ExtResource("1_pyidc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=716113318]
+scale = Vector2(1, 2)
+texture = ExtResource("1_pq8q7")
+
+[node name="HitBox" type="CollisionShape2D" parent="Player" unique_id=1987829564]
+shape = SubResource("CapsuleShape2D_pyidc")
+
+[node name="Weapon" type="Area2D" parent="Player" unique_id=615059541]
+
+[node name="WeaponHitBox" type="CollisionShape2D" parent="Player/Weapon" unique_id=608972563]
+shape = SubResource("SegmentShape2D_pyidc")
+disabled = true
+debug_color = Color(0.91392434, 0.23102379, 0.45999587, 0.41960785)
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1506650603]
+position = Vector2(883, 1216)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=556295603]
+position = Vector2(83.999985, 0)
+scale = Vector2(13.187501, 1)
+texture = ExtResource("1_pq8q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1780431305]
+position = Vector2(84, 0)
+shape = SubResource("RectangleShape2D_vvh5c")
+debug_color = Color(0.7084174, 0.48557287, 0.11472047, 0.41960785)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=755328511]
+position = Vector2(494, 940)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=1287261125]
+texture = ExtResource("1_pq8q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1116728863]
+shape = SubResource("RectangleShape2D_28aoi")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=205486966]
+offset = Vector2(0, -300)
+position_smoothing_speed = 1.0
+script = ExtResource("3_28aoi")
+
+[node name="FPS" type="Label" parent="Camera2D" unique_id=1569527197]
+offset_left = -665.0
+offset_top = -674.0
+offset_right = -637.0
+offset_bottom = -651.0
+text = "100"
+script = ExtResource("3_vvh5c")
